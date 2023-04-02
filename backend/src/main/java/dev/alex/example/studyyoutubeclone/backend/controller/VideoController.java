@@ -1,5 +1,6 @@
 package dev.alex.example.studyyoutubeclone.backend.controller;
 
+import dev.alex.example.studyyoutubeclone.backend.dto.VideoDto;
 import dev.alex.example.studyyoutubeclone.backend.service.VideoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,5 +18,17 @@ public class VideoController {
         videoService.uploadVideo(file);
     }
 
+    @PostMapping("/thumbnail")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String uploadThumbnail(@RequestParam("file") MultipartFile file, @RequestParam("videoId") String videoId) {
+        return videoService.uploadThumbnail(file, videoId);
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.OK)
+    public VideoDto editVideoMetadata(@RequestBody VideoDto videoDto) {
+       return videoService.editVideo(videoDto);
+
+    }
 
 }

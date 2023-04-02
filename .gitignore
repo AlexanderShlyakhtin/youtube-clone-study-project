@@ -6,7 +6,9 @@ target/
 
 ### STS ###
 .apt_generated
+.angular
 .classpath
+
 .factorypath
 .project
 .settings
@@ -21,6 +23,7 @@ target/
 
 ### NetBeans ###
 /nbproject/private/
+/node_modules/
 /nbbuild/
 /dist/
 /nbdist/
