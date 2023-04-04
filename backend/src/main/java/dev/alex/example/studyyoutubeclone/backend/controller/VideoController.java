@@ -1,5 +1,6 @@
 package dev.alex.example.studyyoutubeclone.backend.controller;
 
+import dev.alex.example.studyyoutubeclone.backend.dto.UploadVideoResponse;
 import dev.alex.example.studyyoutubeclone.backend.dto.VideoDto;
 import dev.alex.example.studyyoutubeclone.backend.service.VideoService;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,8 @@ public class VideoController {
     private final VideoService videoService;
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void uploadVideo(@RequestParam("file") MultipartFile file) {
-        videoService.uploadVideo(file);
+    public UploadVideoResponse uploadVideo(@RequestParam("file") MultipartFile file) {
+        return videoService.uploadVideo(file);
     }
 
     @PostMapping("/thumbnail")

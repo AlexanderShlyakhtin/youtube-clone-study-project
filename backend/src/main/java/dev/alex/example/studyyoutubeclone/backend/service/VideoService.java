@@ -1,5 +1,6 @@
 package dev.alex.example.studyyoutubeclone.backend.service;
 
+import dev.alex.example.studyyoutubeclone.backend.dto.UploadVideoResponse;
 import dev.alex.example.studyyoutubeclone.backend.dto.VideoDto;
 import dev.alex.example.studyyoutubeclone.backend.model.Video;
 import dev.alex.example.studyyoutubeclone.backend.repository.VideoRepository;
@@ -13,12 +14,13 @@ public class VideoService {
 
     private final S3FileService s3FileService;
     private final VideoRepository videoRepository;
-    public void uploadVideo(MultipartFile multipartFile) {
+    public UploadVideoResponse uploadVideo(MultipartFile multipartFile) {
         String videoUrl = s3FileService.uploadFile(multipartFile);
         var video = new Video();
         video.setVideoUrl(videoUrl);
 
         videoRepository.save(video);
+        return new UploadVideoResponse(video.getId(), video.getVideoUrl());
     }
 
     public VideoDto editVideo(VideoDto videoDto) {
