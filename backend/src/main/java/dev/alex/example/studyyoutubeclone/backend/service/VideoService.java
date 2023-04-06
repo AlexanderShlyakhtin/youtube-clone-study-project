@@ -52,4 +52,18 @@ public class VideoService {
         return video;
     }
 
+    public VideoDto getVideoDetails(String videoId) {
+        Video videoById = getVideoById(videoId);
+
+        VideoDto videoDto = new VideoDto();
+        videoDto.setId(videoById.getId());
+        videoDto.setVideoUrl(videoById.getVideoUrl());
+        videoDto.setThumbnailUrl(videoById.getThumbnailUrl());
+        videoDto.setDescription(videoById.getDescription());
+        videoDto.setTitle(videoById.getTitle());
+        videoDto.setTags(videoById.getTags());
+        videoDto.setVideoStatus(videoById.getVideoStatus());
+
+        return videoDto;
+    }
 }
