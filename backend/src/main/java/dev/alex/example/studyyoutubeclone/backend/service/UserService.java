@@ -60,4 +60,27 @@ public class UserService {
         currnetUser.addToVideoHistory(videoById);
         userRepository.save(currnetUser);
     }
+
+    public void subscribeUser(String userId) {
+        User currnetUser = getCurrnetUser();
+        currnetUser.addToSubscribedUsers(userId);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userId - " + userId));
+        user.addToSubscribers(currnetUser.getId());
+        userRepository.save(currnetUser);
+        userRepository.save(user);
+
+    }
+
+    public void unSubscribeUser(String userId) {
+        User currnetUser = getCurrnetUser();
+        currnetUser.removeFromSubscribedUsers(userId);
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userId - " + userId));
+        user.removeFromSubscribers(currnetUser.getId());
+        userRepository.save(currnetUser);
+        userRepository.save(user);
+
+    }
 }
