@@ -17,6 +17,7 @@ cloud:
 
 auth0:
   audience: http://localhost:8080
+  userInfoEndpoint: https://dev-pxbc3pxskbq4d3l3.us.auth0.com/userinfo
 
 logging:
   level:
