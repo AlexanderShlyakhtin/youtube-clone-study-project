@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SaveVideoDetailsComponent } from './save-video-details.component';
+import {SaveVideoDetailsComponent} from './save-video-details.component';
 
 describe('SaveVideoDetailsComponent', () => {
   let component: SaveVideoDetailsComponent;

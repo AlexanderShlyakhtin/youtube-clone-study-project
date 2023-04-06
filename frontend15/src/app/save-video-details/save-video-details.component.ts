@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {MatChipEditedEvent, MatChipInputEvent} from "@angular/material/chips";
 import {COMMA, ENTER} from "@angular/cdk/keycodes";
-import {ActivatedRoute, Event} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {VideoService} from "../video.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {VideoDto} from "../video-dto";
