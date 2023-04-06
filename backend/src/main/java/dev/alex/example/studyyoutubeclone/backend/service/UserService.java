@@ -1,12 +1,13 @@
 package dev.alex.example.studyyoutubeclone.backend.service;
 
 import dev.alex.example.studyyoutubeclone.backend.model.User;
-import dev.alex.example.studyyoutubeclone.backend.model.Video;
 import dev.alex.example.studyyoutubeclone.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -76,11 +77,20 @@ public class UserService {
         User currnetUser = getCurrnetUser();
         currnetUser.removeFromSubscribedUsers(userId);
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userId - " + userId));
+        User user = getUserById(userId);
         user.removeFromSubscribers(currnetUser.getId());
         userRepository.save(currnetUser);
         userRepository.save(user);
 
+    }
+
+    public Set<String> getUserHistory(String userId) {
+        User user = getUserById(userId);
+        return user.getVideoHistory();
+    }
+
+    private User getUserById(String userId) {
+        return userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("Cannot find user with userId - " + userId));
     }
 }

@@ -1,12 +1,16 @@
 package dev.alex.example.studyyoutubeclone.backend.service;
 
+import dev.alex.example.studyyoutubeclone.backend.dto.CommentDto;
 import dev.alex.example.studyyoutubeclone.backend.dto.UploadVideoResponse;
 import dev.alex.example.studyyoutubeclone.backend.dto.VideoDto;
+import dev.alex.example.studyyoutubeclone.backend.model.Comment;
 import dev.alex.example.studyyoutubeclone.backend.model.Video;
 import dev.alex.example.studyyoutubeclone.backend.repository.VideoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -122,5 +126,40 @@ public class VideoService {
         videoDto.setLikeCount(videoById.getLikes().get());
         videoDto.setViewCount(videoById.getViewCount());
         return videoDto;
+    }
+
+    public void addComment(String videoId, CommentDto commentDto) {
+        Video video = getVideoById(videoId);
+        Comment comment = new Comment();
+        comment.setText(commentDto.getCommentText());
+        comment.setAuthor(commentDto.getCommentAuthor());
+
+        video.addComment(comment);
+
+        videoRepository.save(video);
+    }
+
+    public List<CommentDto> getAllComments(String videoId) {
+        Video videoById = getVideoById(videoId);
+        List<Comment> comments = videoById.getComments();
+
+        List<CommentDto> commentDtos = comments.stream()
+                .map(comment -> mapToCommentDto(comment))
+                .toList();
+        return commentDtos;
+    }
+
+    private CommentDto mapToCommentDto(Comment comment) {
+        CommentDto commentDto = new CommentDto();
+        commentDto.setCommentText(comment.getText());
+        commentDto.setCommentAuthor(comment.getAuthor());
+
+        return commentDto;
+    }
+
+    public List<VideoDto> getAllVideos() {
+        return videoRepository.findAll().stream()
+                .map(VideoService::mapToVideoDto)
+                .toList();
     }
 }
