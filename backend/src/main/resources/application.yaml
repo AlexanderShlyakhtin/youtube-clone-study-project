@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://dev-pxbc3pxskbq4d3l3.us.auth0.com/
   servlet:
     multipart:
       max-file-size: 100MB
@@ -10,3 +15,12 @@ cloud:
     region:
       static: eu-west-2
 
+auth0:
+  audience: http://localhost:8080
+
+logging:
+  level:
+    web: debug
+    org:
+      springframework:
+        security: debug
