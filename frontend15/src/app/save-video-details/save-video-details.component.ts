@@ -27,6 +27,7 @@ export class SaveVideoDetailsComponent implements OnInit {
   fileSelected = false;
   videoUrl!: string;
   thumbnailUrl!: string;
+  videoAvailable: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private videoService: VideoService,
@@ -36,6 +37,7 @@ export class SaveVideoDetailsComponent implements OnInit {
       .subscribe(data => {
         this.videoUrl = data.videoUrl;
         this.thumbnailUrl = data.thumbnailUrl;
+        this.videoAvailable = true;
       })
     this.saveVideoDetailsForm = new FormGroup({
       title: this.title,
@@ -93,6 +95,7 @@ export class SaveVideoDetailsComponent implements OnInit {
     this.videoService.uploadThumbnail(this.selectedFile, this.videoId)
       .subscribe(data => {
         console.log(data);
+        this.thumbnailUrl = data;
         this.matSnackBar.open("Thumbnail Upload Successfully", "OK")
       })
   }
@@ -105,7 +108,10 @@ export class SaveVideoDetailsComponent implements OnInit {
       "tags": this.tags,
       "videoStatus": this.saveVideoDetailsForm.get('videoStatus')?.value,
       "videoUrl": this.videoUrl,
-      "thumbnailUrl": this.thumbnailUrl
+      "thumbnailUrl": this.thumbnailUrl,
+      "viewCount": 0,
+      "likeCount": 0,
+      "dislikeCount": 0
     }
     this.videoService.saveVideo(videoMetaData)
       .subscribe(data => {

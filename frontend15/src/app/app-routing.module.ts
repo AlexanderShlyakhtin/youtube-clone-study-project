@@ -3,8 +3,31 @@ import {RouterModule, Routes} from '@angular/router';
 import {SaveVideoDetailsComponent} from "./save-video-details/save-video-details.component";
 import {UploadVideoComponent} from "./upload-video/upload-video.component";
 import {VideoDetailComponent} from "./video-detail/video-detail.component";
+import {HomeComponent} from "./home/home.component";
+import {SubscriptionComponent} from "./subscription/subscription.component";
+import {HistoryComponent} from "./history/history.component";
+import {LikedVideoComponent} from "./liked-video/liked-video.component";
+import {FeaturedComponent} from "./featured/featured.component";
+import {CallbackComponent} from "./callback/callback.component";
 
 const routes: Routes = [
+  {
+    path: '', component: HomeComponent,
+    children: [
+      {
+        path: 'featured', component: FeaturedComponent
+      },
+      {
+        path: 'subscriptions', component: SubscriptionComponent
+      },
+      {
+        path: 'history', component: HistoryComponent
+      },
+      {
+        path: 'liked-videos', component: LikedVideoComponent
+      }
+    ]
+  },
   {
     path: 'upload-video', component: UploadVideoComponent
   },
@@ -13,6 +36,9 @@ const routes: Routes = [
   },
   {
     path: 'video-details/:videoId', component: VideoDetailComponent
+  },
+  {
+    path: 'callback', component: CallbackComponent
   }
 
 ];

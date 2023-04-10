@@ -30,9 +30,10 @@ public class VideoService {
 
     public VideoDto editVideo(VideoDto videoDto) {
         Video video = getVideoById(videoDto.getId());
-        video.setTitle(video.getTitle());
-        video.setDescription(video.getDescription());
-        video.setTags(video.getTags());
+
+        video.setTitle(videoDto.getTitle());
+        video.setDescription(videoDto.getDescription());
+        video.setTags(videoDto.getTags());
         video.setThumbnailUrl(videoDto.getThumbnailUrl());
         video.setVideoStatus(videoDto.getVideoStatus());
 
