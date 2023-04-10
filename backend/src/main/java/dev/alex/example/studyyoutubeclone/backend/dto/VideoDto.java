@@ -21,5 +21,7 @@ public class VideoDto {
     private VideoStatus videoStatus;
     private AtomicInteger viewCount = new AtomicInteger(0);
     private String thumbnailUrl;
+    private Integer likeCount;
+    private Integer dislikeCount;
 
 }

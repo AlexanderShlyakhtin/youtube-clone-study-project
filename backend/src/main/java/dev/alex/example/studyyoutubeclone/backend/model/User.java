@@ -54,4 +54,12 @@ public class User {
     public void addToSubscribers(String userId) {
         subscribers.add(userId);
     }
+
+    public void removeFromSubscribedUsers(String userId) {
+        subscribedToUsers.remove(userId);
+    }
+
+    public void removeFromSubscribers(String userId) {
+        subscribers.remove(userId);
+    }
 }
